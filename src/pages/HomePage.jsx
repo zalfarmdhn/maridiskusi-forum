@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import { Badge, Button, Card } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import ThreadList from '../components/ThreadList';
@@ -47,7 +48,14 @@ function HomePage({ authUser }) {
       <Card className="max-w</div>-sm mx-auto grid-cols-2" horizontal>
         <div>
           <Link to="/new">
-            <Button>Add New Thread</Button>
+            <motion.button
+              whileTap={{ scale: 0.85 }}
+              whileHover={{ scale: 1.1 }}
+            >
+              <Button>
+                Add New Thread
+              </Button>
+            </motion.button>
           </Link>
         </div>
         <h3>Kategori Populer</h3>

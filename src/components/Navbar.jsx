@@ -5,6 +5,7 @@ import {
   NavbarCollapse,
   NavbarToggle,
 } from 'flowbite-react';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { GoCommentDiscussion } from 'react-icons/go';
@@ -18,16 +19,28 @@ export function HeaderNavbar({ authUser, signOut }) {
       </NavbarBrand>
       <div className="flex md:order-2">
         <Link to="/" onClick={signOut}>
-          <Button>Sign Out</Button>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+          >
+            <Button>Sign Out</Button>
+          </motion.button>
           <NavbarToggle />
         </Link>
       </div>
       <NavbarCollapse>
         <Link to="/">
-          Home
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+          >
+            Home
+          </motion.button>
         </Link>
         <Link to="/leaderboard">
-          Leaderboard
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+          >
+            Leaderboard
+          </motion.button>
         </Link>
         <p>
           {authUser && `logged in as ${authUser.name}`}
