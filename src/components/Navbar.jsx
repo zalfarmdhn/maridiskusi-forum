@@ -1,9 +1,9 @@
 import {
-  Button,
+  Avatar,
+  Dropdown,
   Navbar,
   NavbarBrand,
   NavbarCollapse,
-  NavbarToggle,
 } from 'flowbite-react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
@@ -18,14 +18,26 @@ export function HeaderNavbar({ authUser, signOut }) {
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Maridiskus</span>
       </NavbarBrand>
       <div className="flex md:order-2">
-        <Link to="/" onClick={signOut}>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-          >
-            <Button>Sign Out</Button>
-          </motion.button>
-          <NavbarToggle />
-        </Link>
+        <Dropdown
+          arrowIcon={false}
+          inline
+          label={
+            <Avatar alt="User settings" img={authUser.avatar} rounded />
+          }
+        >
+          <Dropdown.Header>
+            <span className="block text-sm">
+              Signed in as
+              {' '}
+              {authUser.name}
+            </span>
+          </Dropdown.Header>
+          <Dropdown.Divider />
+          <Link to="/" onClick={signOut}>
+            <Dropdown.Item>Sign out</Dropdown.Item>
+          </Link>
+        </Dropdown>
+        <Navbar.Toggle />
       </div>
       <NavbarCollapse>
         <Link to="/">
@@ -53,6 +65,7 @@ export function HeaderNavbar({ authUser, signOut }) {
 HeaderNavbar.propTypes = {
   authUser: PropTypes.shape({
     id: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
   signOut: PropTypes.func.isRequired,

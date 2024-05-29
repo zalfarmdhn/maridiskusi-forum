@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import { Badge, Button, Card } from 'flowbite-react';
 import { Link } from 'react-router-dom';
@@ -44,42 +45,49 @@ function HomePage({ authUser }) {
   }));
 
   return (
-    <section className="homepage">
-      <Card className="max-w</div>-sm mx-auto grid-cols-2" horizontal>
-        <div>
-          <Link to="/new">
-            <motion.button
-              whileTap={{ scale: 0.85 }}
-              whileHover={{ scale: 1.1 }}
-            >
-              <Button>
-                Add New Thread
-              </Button>
-            </motion.button>
-          </Link>
-        </div>
-        <h3>Kategori Populer</h3>
-        <div className="flex flex-wrap gap-2">
-          {uniqueCategories.map((category) => (
-            <Badge key={category} color="gray" size="sm" href="#" onClick={() => onCategorySelect(category)}>
-              #
-              {category}
+    <>
+      <Toaster />
+      <section className="homepage">
+        {/* Add Thread */}
+        <Card className="flex flex-col items-center max-w</div>-sm mx-auto" horizontal>
+          <div>
+            <Link to="/new">
+              <motion.button
+                whileTap={{ scale: 0.85 }}
+                whileHover={{ scale: 1.1 }}
+              >
+                <Button>
+                  Add Thread
+                </Button>
+              </motion.button>
+            </Link>
+          </div>
+          <h3>Kategori Populer</h3>
+          <div className="flex flex-wrap gap-2">
+            <Badge color="gray" size="sm" href="#" onClick={() => onCategorySelect(null)}>
+              All
             </Badge>
-          ))}
-        </div>
-      </Card>
-      <ThreadList
-        threads={
-          categorySelect
-            ? threads.filter((thread) => thread.category === categorySelect)
-            : threadList
-        }
-        upvote={onUpvote}
-        downvote={onDownvote}
-        neutralvote={onNeutralvote}
-        authUser={authUser}
-      />
-    </section>
+            {uniqueCategories.map((category) => (
+              <Badge key={category} color="gray" size="sm" href="#" onClick={() => onCategorySelect(category)}>
+                #
+                {category}
+              </Badge>
+            ))}
+          </div>
+        </Card>
+        <ThreadList
+          threads={
+            categorySelect
+              ? threads.filter((thread) => thread.category === categorySelect)
+              : threadList
+          }
+          upvote={onUpvote}
+          downvote={onDownvote}
+          neutralvote={onNeutralvote}
+          authUser={authUser}
+        />
+      </section>
+    </>
   );
 }
 

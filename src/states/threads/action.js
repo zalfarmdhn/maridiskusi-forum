@@ -1,4 +1,5 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import toast from 'react-hot-toast';
 import api from '../../utils/api';
 
 const ActionType = {
@@ -60,8 +61,9 @@ function asyncAddThread({ title, body, category = '' }) {
       dispatch(showLoading());
       const thread = await api.createThread({ title, body, category });
       dispatch(addThreadActionCreator(thread));
+      toast.success('Thread created successfully');
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       dispatch(hideLoading());
     }
@@ -73,6 +75,7 @@ function asyncUpvoteThread(threadId) {
     try {
       const thread = await api.toggleUpvote(threadId);
       dispatch(toggleUpvoteActionCreator(thread));
+      toast.success('Upvoted successfully');
     } catch (error) {
       alert(error.message);
     }

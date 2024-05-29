@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import api from '../../utils/api';
 
 const ActionType = {
@@ -17,8 +18,9 @@ function asyncRegisterUser({ name, email, password }) {
   return async () => {
     try {
       await api.register({ name, email, password });
+      toast.success('Account created, please login!');
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 }
