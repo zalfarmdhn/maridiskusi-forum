@@ -4,7 +4,7 @@ import useInput from '../hooks/useInput';
 
 function LoginInput({ login }) {
   const [email, setEmail] = useInput('');
-  // const [password, setPassword] = useInput('');
+  const [password, setPassword] = useInput('');
 
   return (
     <form className="flex max-w-md flex-col gap-4">
