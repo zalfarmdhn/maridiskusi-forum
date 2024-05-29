@@ -15,7 +15,7 @@ function LoginPage() {
 
   return (
     <Card className="max-w-md mx-auto py-2 my-10">
-      <h2 className="font-bold mx-auto">Login ke Maridiskus</h2>
+      <h2 className="font-bold mx-auto">Silahkan Login ke Maridiskus</h2>
       <LoginInput login={onLogin} />
       <p>Didn&apos;t have an account? </p>
       <Link to="/register">
